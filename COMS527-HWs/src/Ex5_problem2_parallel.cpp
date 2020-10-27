@@ -8,7 +8,7 @@
 using namespace std;
 using namespace std::chrono;
 /* Define length of dot product vectors */
-#define NT 8
+#define NT 32
 #define VECLEN 1000000000
 #define L1 2000000
 #define L2 1000000
