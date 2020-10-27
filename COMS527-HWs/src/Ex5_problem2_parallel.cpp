@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 	printf("Starting omp_dotprod_parallel\n");
 	auto start = high_resolution_clock::now();
 
-	#pragma omp parallel private(i,j,tid) ccollapse(2)
+	#pragma omp parallel private(i,j,tid) collapse(2)
 	for(i=1;i<=L1;i++){
 		for(j=1;j<=L1;j++){
 			tid = omp_get_thread_num();
