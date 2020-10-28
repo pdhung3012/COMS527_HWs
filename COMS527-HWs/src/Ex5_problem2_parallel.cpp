@@ -28,8 +28,8 @@ int main(int argc, char *argv[]) {
 	#pragma omp parallel for collapse(2)
 	for(i=1;i<=L1;i++){
 		for(j=1;j<=L2;j++){
-			tid = omp_get_thread_num();
-			cout<<"inside (i,j) ("<<i<<","<<j<<") print thread id "<<tid<<endl;
+//			tid = omp_get_thread_num();
+			cout<<"inside (i,j) ("<<i<<","<<j<<") print thread id "<<omp_get_thread_num()<<endl;
 		}
 	}
 
