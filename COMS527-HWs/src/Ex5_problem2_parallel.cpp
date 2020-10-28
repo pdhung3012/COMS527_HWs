@@ -11,7 +11,7 @@ using namespace std::chrono;
 #define NT 32
 #define VECLEN 1000000000
 #define L1 2000000
-#define L2 100
+#define L2 1000000
 
 long i,j;
 unsigned seed;
