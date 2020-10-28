@@ -11,7 +11,7 @@ using namespace std::chrono;
 #define NT 32
 #define VECLEN 1000000000
 #define L1 2000000
-#define L2 1000000
+#define L2 100
 
 long i,j;
 unsigned seed;
@@ -25,9 +25,9 @@ int main(int argc, char *argv[]) {
 	printf("Starting omp_dotprod_parallel\n");
 	auto start = high_resolution_clock::now();
 
-	#pragma omp parallel for collapse(2) private(i,j,tid)
+	#pragma omp parallel for collapse(2)
 	for(i=1;i<=L1;i++){
-		for(j=1;j<=L1;j++){
+		for(j=1;j<=L2;j++){
 			tid = omp_get_thread_num();
 			cout<<"inside (i,j) ("<<i<<","<<j<<") print thread id "<<tid<<endl;
 		}
