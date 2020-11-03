@@ -13,31 +13,33 @@ using namespace std::chrono;
 #define L1 2000000
 #define L2 1000000
 
-long i,j;
+long i, j;
 unsigned seed;
 int tid;
 
 int main(int argc, char *argv[]) {
 	int i, len = VECLEN;
-	double *a, *b,*c,*d;
 	double sum;
 	omp_set_num_threads(NT);
 	printf("Starting omp_dotprod_parallel\n");
 	auto start = high_resolution_clock::now();
-
-	#pragma omp parallel for collapse(2)
-	for(i=1;i<=L1;i++){
-		for(j=1;j<=L2;j++){
+#pragma omp target
+	{
+		#pragma omp parallel for collapse(2) private(i,j)
+		for (i = 1; i <= L1; i++) {
+			for (j = 1; j <= L2; j++) {
 //			tid = omp_get_thread_num();
-			cout<<"inside (i,j) ("<<i<<","<<j<<") print thread id "<<omp_get_thread_num()<<endl;
+				cout << "inside (i,j) (" << i << "," << j
+						<< ") print thread id " << omp_get_thread_num() << endl;
+			}
 		}
-	}
 
+	}
 
 	auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(stop - start);
 
-		cout << "Time taken with parallelization: "
-			 << duration.count() << " microseconds" << endl;
+	cout << "Time taken with parallelization: " << duration.count()
+			<< " microseconds" << endl;
 
 }
