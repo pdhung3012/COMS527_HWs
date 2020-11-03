@@ -23,8 +23,8 @@ int main(int argc, char *argv[]) {
 	omp_set_num_threads(NT);
 	printf("Starting omp_dotprod_parallel\n");
 	auto start = high_resolution_clock::now();
-	#pragma omp target
-	{
+//	#pragma omp target
+//	{
 		#pragma omp parallel for collapse(2) private(i,j,tid)
 		for (i = 1; i <= L1; i++) {
 			for (j = 1; j <= L2; j++) {
@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
 			}
 		}
 
-	}
+//	}
 
 	auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(stop - start);
