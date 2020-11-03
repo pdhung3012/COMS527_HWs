@@ -25,11 +25,11 @@ int main(int argc, char *argv[]) {
 	auto start = high_resolution_clock::now();
 #pragma omp target
 	{
-		#pragma omp parallel for collapse(2) private(i,j)
+		#pragma omp parallel for collapse(2) private(i,j,tid)
 		for (i = 1; i <= L1; i++) {
 			for (j = 1; j <= L2; j++) {
-//			tid = omp_get_thread_num();
-				cout << "inside (i,j) (" << i << "," << j<< ") print thread id " << omp_get_thread_num() << endl;
+			tid = omp_get_thread_num();
+				printf( "inside (i,j) (%d,%s) print thread id %d\n",i,j,tid);
 			}
 		}
 
