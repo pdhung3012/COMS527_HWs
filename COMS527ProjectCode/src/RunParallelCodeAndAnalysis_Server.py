@@ -57,7 +57,9 @@ for i in range(0,len(listFiles)):
     output_fileName = 'output-'+fileNameI+'.txt'
     print('{} {} begin'.format((i + 1), fileNameI))
     try:
-        strCommand1 = 'gcc  -fopenmp ' + listFiles[i] + ' -o ' + fopOutputAnalysis + fileNameI + '.o'
+        # strCommand1 = 'clang  -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include/  -fopenmp ' + listFiles[i] + ' -o ' + fopOutputAnalysis + fileNameI + '.o'
+        strCommand1 = 'gcc  -fopenmp ' + listFiles[
+            i] + ' -o ' + fopOutputAnalysis + fileNameI + '.o'
         strCommand2 = fopOutputAnalysis + fileNameI + ".o <" + fopTempAnalysis + "inputTest.txt >" + fopOutputAnalysis + output_fileName
         # os.system(strCommand1)
         command = Command(strCommand1)
