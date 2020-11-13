@@ -92,12 +92,12 @@ class Walker:
                 indexOfFor=indexOfFor-1
 
 
-index = clang.cindex.Index.create()
-tu = index.parse(fpTempFile)
-print('{}'.format(tu))
-root = tu.cursor
-index=0
-indexOfForLoop=0
-walker = Walker(fpTempFile)
-walker.walkInForLoop(root,index,indexOfForLoop)
-print('size {} {} '.format(len(walker.listForLoops),walker.listForLoops[0].lineNumber))
+# index = clang.cindex.Index.create()
+# tu = index.parse(fpTempFile)
+# print('{}'.format(tu))
+# root = tu.cursor
+# index=0
+# indexOfForLoop=0
+# walker = Walker(fpTempFile)
+# walker.walkInForLoop(root,index,indexOfForLoop)
+# print('size {} {} '.format(len(walker.listForLoops),walker.listForLoops[0].lineNumber))
