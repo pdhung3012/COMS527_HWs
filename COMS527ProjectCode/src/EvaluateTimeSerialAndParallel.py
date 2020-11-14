@@ -10,11 +10,11 @@ import timeit
 fopInput='/home/hung/git/COMS527_data/PrutorCodes/'
 fopTempAnalysis='/home/hung/git/COMS527_data/TempAnalysis/'
 
-fopSerialTime='/home/hung/git/COMS527_data/SerialTimeAnalysis_1000/'
-fopOutputAnalysis='/home/hung/git/COMS527_data/OutputAnalysis_1000/'
+fopSerialTime='/home/hung/git/COMS527_data/SerialTimeAnalysis_all/'
+fopOutputAnalysis='/home/hung/git/COMS527_data/OutputAnalysis_all/'
 
-fopParallelTime='/home/hung/git/COMS527_data/Aug1-TimeAnalysis_1000/'
-fopParallelOutputAnalysis='/home/hung/git/COMS527_data/Aug1-OutputAnalysis_1000/'
+fopParallelTime='/home/hung/git/COMS527_data/Aug1-TimeAnalysis_all/'
+fopParallelOutputAnalysis='/home/hung/git/COMS527_data/Aug1-OutputAnalysis_all/'
 
 def intersection(lst1, lst2):
     lst3 = [value for value in lst1 if value in lst2]
@@ -148,7 +148,7 @@ for i in range(0,len(listFiles)):
         listSerialAnalysis.append(fileName)
         dictSerialAnalysis[fileName]=strContentOutputSerial
 
-    print('{} {} {} {}'.format(isTimeParallelOK,isOutputParallelOK,isTimeSerialOK,isOutputSerialOK))
+    # print('{} {} {} {}'.format(isTimeParallelOK,isOutputParallelOK,isTimeSerialOK,isOutputSerialOK))
     if(isTimeParallelOK and isOutputParallelOK and isTimeSerialOK and isOutputSerialOK):
         listNameIntersection.append(fileName)
         print('{} file {} is OK'.format((i+1),fileName))
