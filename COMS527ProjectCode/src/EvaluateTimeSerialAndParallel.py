@@ -104,17 +104,20 @@ for i in range(0,len(listFiles)):
         num = float(strContentTimeParallel.split('\n')[2])
         dictParallelTime[fileName] = num
 
-    fpOutputParallel=fopParallelOutputAnalysis+'out-'+fileName+'.txt'
+    fpOutputParallel=fopParallelOutputAnalysis+'output-'+fileName+'.txt'
+    print(fpOutputParallel)
     strContentOutputParallel = ''
     try:
         f = open(fpOutputParallel, 'r', encoding="latin-1")
         strContentOutputParallel = f.read().strip()
         f.close()
     except Exception as e:
+        # print(str(e))
         strContentOutputParallel = ''
     # print('parallel o {}'.format(fileName))
     if ((strContentOutputParallel != '') and (not 'error' in strContentOutputParallel)):
         # listParallelAnalysis.append(fileName)
+        # print('go here')
         isOutputParallelOK=True
         dictParallelAnalysis[fileName] = strContentOutputParallel
 
@@ -132,7 +135,7 @@ for i in range(0,len(listFiles)):
         num= float(strContentTimeSerial.split('\n')[2])
         dictSerialTime[fileName]=num
 
-    fpOutputSerial = fopOutputAnalysis + 'out-' + fileName + '.txt'
+    fpOutputSerial = fopOutputAnalysis + 'output-' + fileName + '.txt'
     strContentOutputSerial = ''
     try:
         f = open(fpOutputSerial, 'r', encoding="latin-1")
@@ -145,6 +148,7 @@ for i in range(0,len(listFiles)):
         listSerialAnalysis.append(fileName)
         dictSerialAnalysis[fileName]=strContentOutputSerial
 
+    print('{} {} {} {}'.format(isTimeParallelOK,isOutputParallelOK,isTimeSerialOK,isOutputSerialOK))
     if(isTimeParallelOK and isOutputParallelOK and isTimeSerialOK and isOutputSerialOK):
         listNameIntersection.append(fileName)
         print('{} file {} is OK'.format((i+1),fileName))
