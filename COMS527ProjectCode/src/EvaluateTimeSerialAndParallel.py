@@ -115,21 +115,25 @@ for strFilePath in listFiles:
 
 listNameIntersection=intersection(intersection(listParallelTime,listParallelAnalysis), intersection(listSerialTime,listSerialAnalysis))
 print('{} {} {} {} {}'.format(len(listSerialTime),len(listSerialAnalysis),len(listParallelTime),len(listParallelAnalysis),len(listNameIntersection)))
-strHead='Code,TimeSerial,TimeParallel,IsParallelBetterInTime,IsOutputConsistent'
+strHead='Code,TimeSerial,TimeParallel,IsParallelBetterInTime,IsOutputConsistent,IsAllConsistent'
 lstTotal=[]
 lstTotal.append(strHead)
 numOfAbnormalInTime=0
 numOfAbnormalInOutput=0
+numOfAbnormalInTotal=0
 for i in range(0,len(listNameIntersection)):
     strName=listNameIntersection[i]
     isParallelBetterInTime=dictParallelTime[strName]<dictSerialTime[strName]
     isOutputConsistent=dictParallelAnalysis[strName]!=dictSerialAnalysis[strName]
+    isAllConsistent=isParallelBetterInTime and isOutputConsistent
     if not isParallelBetterInTime:
         numOfAbnormalInTime=numOfAbnormalInTime+1
     if not isOutputConsistent:
         numOfAbnormalInOutput=numOfAbnormalInOutput+1
+    if not isAllConsistent:
+        numOfAbnormalInTotal=numOfAbnormalInTotal+1
 
-    strLine='{},{},{},{},{}'.format(strName,dictSerialTime[strName],dictParallelTime[strName],isParallelBetterInTime,isOutputConsistent)
+    strLine='{},{},{},{},{},{}'.format(strName,dictSerialTime[strName],dictParallelTime[strName],isParallelBetterInTime,isOutputConsistent,isAllConsistent)
     lstTotal.append(strLine)
 
 strContent='\n'.join(lstTotal)
@@ -139,8 +143,9 @@ f.close()
 
 percentAbTime=numOfAbnormalInTime*100.0/len(listNameIntersection)
 percentAbOutput=numOfAbnormalInOutput*100.0/len(listNameIntersection)
+percentAbTotal=numOfAbnormalInTotal*100.0/len(listNameIntersection)
 
-strContent='Percent abnormal in time {} {} {}\nPercent abnormal in output {} {} {}\n'.format(numOfAbnormalInTime,len(listNameIntersection),percentAbTime,numOfAbnormalInOutput,len(listNameIntersection),percentAbOutput)
+strContent='Percent abnormal in time {} {} {}\nPercent abnormal in output {} {} {}\nPercent abnormal in total {} {} {}\n'.format(numOfAbnormalInTime,len(listNameIntersection),percentAbTime,numOfAbnormalInOutput,len(listNameIntersection),percentAbOutput,len(listNameIntersection),numOfAbnormalInTotal,percentAbTotal)
 f=open(fopTempAnalysis+'summarization.txt','w')
 f.write(strContent)
 f.close()
