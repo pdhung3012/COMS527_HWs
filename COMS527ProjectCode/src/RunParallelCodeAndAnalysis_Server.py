@@ -9,7 +9,7 @@ from TestRunProcess import Command
 
 
 
-fopInput='/home/hung/git/COMS527_data/Augment1/'
+fopInput='/home/hung/git/COMS527_data/Augment1_all/'
 fopSerialTime='/home/hung/git/COMS527_data/Aug1-TimeAnalysis/'
 fopOutputAnalysis='/home/hung/git/COMS527_data/Aug1-OutputAnalysis/'
 fopTempAnalysis='/home/hung/git/COMS527_data/TempAnalysis/'
@@ -86,5 +86,5 @@ for i in range(0,len(listFiles)):
     except Exception as e:
         print('{} {} fail {}'.format((i + 1),fileNameI,str(e)))
 
-    # if (i>=101):
-    #     break
+    if (i>=1001):
+        break
