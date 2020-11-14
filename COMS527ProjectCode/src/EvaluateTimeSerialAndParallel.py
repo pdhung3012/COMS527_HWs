@@ -25,9 +25,10 @@ listSerialAnalysis=[]
 listParallelTime=[]
 listParallelAnalysis=[]
 dictSerialTime={}
-dictSerialAnalysis={}
+# dictSerialAnalysis={}
 dictParallelTime={}
-dictParallelAnalysis={}
+# dictParallelAnalysis={}
+dictOutputSame={}
 
 # currentPattern = "*.txt"
 # listFiles=[]
@@ -105,7 +106,7 @@ for i in range(0,len(listFiles)):
         dictParallelTime[fileName] = num
 
     fpOutputParallel=fopParallelOutputAnalysis+'output-'+fileName+'.txt'
-    print(fpOutputParallel)
+    # print(fpOutputParallel)
     strContentOutputParallel = ''
     try:
         f = open(fpOutputParallel, 'r', encoding="latin-1")
@@ -119,7 +120,7 @@ for i in range(0,len(listFiles)):
         # listParallelAnalysis.append(fileName)
         # print('go here')
         isOutputParallelOK=True
-        dictParallelAnalysis[fileName] = strContentOutputParallel
+        # dictParallelAnalysis[fileName] = strContentOutputParallel
 
     fpTimeSerial = fopSerialTime + 'time-' + fileName + '.txt'
     strContentTimeSerial = ''
@@ -146,11 +147,17 @@ for i in range(0,len(listFiles)):
     if ((strContentOutputSerial != '') and (not 'error' in strContentOutputSerial)):
         isOutputSerialOK=True
         listSerialAnalysis.append(fileName)
-        dictSerialAnalysis[fileName]=strContentOutputSerial
+        # dictSerialAnalysis[fileName]=strContentOutputSerial
 
     # print('{} {} {} {}'.format(isTimeParallelOK,isOutputParallelOK,isTimeSerialOK,isOutputSerialOK))
     if(isTimeParallelOK and isOutputParallelOK and isTimeSerialOK and isOutputSerialOK):
         listNameIntersection.append(fileName)
+
+        if strContentOutputSerial == strContentOutputParallel:
+            dictOutputSame[fileName]=True
+        else:
+            dictOutputSame[fileName]=False
+
         print('{} file {} is OK'.format((i+1),fileName))
     else:
         print('{} file {} is missing'.format((i + 1), fileName))
@@ -166,7 +173,7 @@ totalMillisecondParallel=0
 for i in range(0,len(listNameIntersection)):
     strName=listNameIntersection[i]
     isParallelBetterInTime=dictParallelTime[strName]<dictSerialTime[strName]
-    isOutputConsistent=dictParallelAnalysis[strName]!=dictSerialAnalysis[strName]
+    isOutputConsistent=dictOutputSame[strName]
     isAllConsistent=isParallelBetterInTime and isOutputConsistent
     if not isParallelBetterInTime:
         numOfAbnormalInTime=numOfAbnormalInTime+1
