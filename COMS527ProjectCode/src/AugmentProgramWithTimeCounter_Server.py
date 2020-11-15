@@ -92,8 +92,17 @@ for i in range(0,len(listFiles)):
             lstNewSerialStr=[]
             lstNewSerialStr.append(strIncludeOMP)
             isAddFunction=False
+
+            lineToAddBeginExecution=-1
+            lineJ=walker.lineBeginOfMainFunction
+            strTemp=arrF1[lineJ].strip()
+            if strTemp.startswith('{'):
+                lineToAddBeginExecution=lineJ+1
+            else:
+                lineToAddBeginExecution=walker.lineBeginOfMainFunction
+
             for j in range(0,len(arrF1)):
-                if (j+1) == (walker.lineBeginOfMainFunction+1):
+                if (j+1) == (lineToAddBeginExecution+1):
                     lstNewParallelStr.append(strBeginCounterCmds)
                     lstNewSerialStr.append(strBeginCounterCmds)
                 elif (j+1) == (walker.lineEndOfMainFunction-1):
