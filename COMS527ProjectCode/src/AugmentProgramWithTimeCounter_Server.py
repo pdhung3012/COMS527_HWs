@@ -105,7 +105,7 @@ for i in range(0,len(listFiles)):
                 if (j+1) == (lineToAddBeginExecution+1):
                     lstNewParallelStr.append(strBeginCounterCmds)
                     lstNewSerialStr.append(strBeginCounterCmds)
-                elif (j+1) == (walker.lineEndOfMainFunction-1):
+                elif (j+1) == (walker.lineEndOfMainFunction):
                     lstNewParallelStr.append(strEndCounterCmds)
                     lstNewSerialStr.append(strEndCounterCmds)
                 elif (j+1) in setLineFor:
