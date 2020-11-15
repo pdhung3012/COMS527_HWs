@@ -86,5 +86,5 @@ for i in range(0,len(listFiles)):
     except Exception as e:
         print('{} {} fail {}'.format((i + 1),fileNameI,str(e)))
 
-    if (i>=1001):
-        break
+    # if (i>=1001):
+    #     break
