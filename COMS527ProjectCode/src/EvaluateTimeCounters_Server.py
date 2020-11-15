@@ -10,9 +10,9 @@ import timeit
 fopInput='/home/hung/git/COMS527_data/PrutorCodes/'
 fopTempAnalysis='/home/hung/git/COMS527_data/TempAnalysis/'
 # fopSerialTime='/home/hung/git/COMS527_data/TimeAnalysis_all/'
-fopOutputAnalysis='/home/hung/git/COMS527_data/OutputAnalysis_all/'
+fopOutputAnalysis='/home/hung/git/COMS527_data/OutputAnalysis_all2/'
 # fopParallelTime='/home/hung/git/COMS527_data/Aug1-TimeAnalysis_all/'
-fopParallelOutputAnalysis='/home/hung/git/COMS527_data/Aug1-OutputAnalysis_all/'
+fopParallelOutputAnalysis='/home/hung/git/COMS527_data/Aug1-OutputAnalysis_all2/'
 
 def intersection(lst1, lst2):
     lst3 = [value for value in lst1 if value in lst2]
@@ -112,8 +112,8 @@ for i in range(0,len(listFiles)):
         print('{} file {} is OK'.format((i+1),fileName))
     else:
         print('{} file {} is missing'.format((i + 1), fileName))
-    if i == 1000:
-        break
+    # if i == 1000:
+    #     break
 
 strHead='Code,TimeSerial,TimeParallel,IsParallelBetterInTime,IsOutputConsistent,IsAllConsistent'
 lstTotal=[]
