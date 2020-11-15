@@ -10,7 +10,7 @@ from TestRunProcess import Command
 
 
 
-fopInput='/home/hung/git/COMS527_data/TimeCounter-Serial/'
+fopInput='/home/hung/git/COMS527_data/TimeCounterPrograms-Serial/'
 fopSerialTime='/home/hung/git/COMS527_data/TimeAnalysis/'
 fopOutputAnalysis='/home/hung/git/COMS527_data/OutputAnalysis/'
 fopTempAnalysis='/home/hung/git/COMS527_data/TempAnalysis/'
