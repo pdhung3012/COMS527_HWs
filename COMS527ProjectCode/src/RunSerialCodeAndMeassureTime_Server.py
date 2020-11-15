@@ -9,9 +9,10 @@ from TestRunProcess import Command
 
 
 
-fopInput='/home/hung/git/COMS527_data/TimeCounter-Parallel/'
-fopSerialTime='/home/hung/git/COMS527_data/Aug1-TimeAnalysis/'
-fopOutputAnalysis='/home/hung/git/COMS527_data/Aug1-OutputAnalysis/'
+
+fopInput='/home/hung/git/COMS527_data/TimeCounter-Serial/'
+fopSerialTime='/home/hung/git/COMS527_data/TimeAnalysis/'
+fopOutputAnalysis='/home/hung/git/COMS527_data/OutputAnalysis/'
 fopTempAnalysis='/home/hung/git/COMS527_data/TempAnalysis/'
 
 
@@ -57,9 +58,7 @@ for i in range(0,len(listFiles)):
     output_fileName = 'output-'+fileNameI+'.txt'
     print('{} {} begin'.format((i + 1), fileNameI))
     try:
-        # strCommand1 = 'clang  -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include/  -fopenmp ' + listFiles[i] + ' -o ' + fopOutputAnalysis + fileNameI + '.o'
-        strCommand1 = 'gcc  -fopenmp ' + listFiles[
-            i] + ' -o ' + fopOutputAnalysis + fileNameI + '.o'
+        strCommand1 = 'gcc ' + listFiles[i] + ' -o ' + fopOutputAnalysis + fileNameI + '.o'
         strCommand2 = fopOutputAnalysis + fileNameI + ".o <" + fopTempAnalysis + "inputTest.txt >" + fopOutputAnalysis + output_fileName
         # os.system(strCommand1)
         command = Command(strCommand1)
