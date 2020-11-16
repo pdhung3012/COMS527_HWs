@@ -34,10 +34,12 @@ arrActivationFunctions=['relu','tanh','sigmoid']
 listTestAcc=[]
 listConfigs=[]
 listTotalContent=[]
+# run a loop for changing configs
 for i1 in range(0,len(arrActivationFunctions)):
     for i2 in range(1,6):
         strFunc=arrActivationFunctions[i1]
 
+# model construction
         model = models.Sequential()
         model.add(Conv2D(32, (3, 3), activation=strFunc,kernel_initializer='he_normal', input_shape=(32, 32, 3)))
         model.add(MaxPooling2D((2, 2)))
@@ -55,6 +57,8 @@ for i1 in range(0,len(arrActivationFunctions)):
 
         history = model.fit(train_images, train_labels, epochs=i2,
                             validation_data=(test_images, test_labels))
+
+        # evaluation
         test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
         # print('test acc {}'.format(test_acc))
         # print(test_labels.shape)
