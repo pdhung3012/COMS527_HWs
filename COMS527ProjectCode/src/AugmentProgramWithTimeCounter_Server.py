@@ -55,7 +55,7 @@ print('{}'.format(len(listFiles)))
 # Command cmd;
 clang.cindex.Config.set_library_file('/home/hung/anaconda3/pkgs/libclang-8.0.1-hc9558a2_2/lib/libclang.so')
 
-strPragmaForTemplate='#pragma omp parallel for'
+strPragmaForTemplate='#pragma omp parallel for schedule(dynamic, 4)'
 strSetThreadFunction='omp_set_num_threads(16);'
 strIncludeOMP='#include<omp.h>\n#include <time.h>'
 strBeginCounterCmds='\tclock_t start_t = clock();'
