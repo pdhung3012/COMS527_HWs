@@ -10,9 +10,9 @@ import timeit
 fopInput='/home/hung/git/COMS527_data/PrutorCodes/'
 fopTempAnalysis='/home/hung/git/COMS527_data/TempAnalysis/'
 # fopSerialTime='/home/hung/git/COMS527_data/TimeAnalysis_all/'
-fopOutputAnalysis='/home/hung/git/COMS527_data/OutputAnalysis_all2/'
+fopOutputAnalysis='/home/hung/git/COMS527_data/OutputAnalysis_all3/'
 # fopParallelTime='/home/hung/git/COMS527_data/Aug1-TimeAnalysis_all/'
-fopParallelOutputAnalysis='/home/hung/git/COMS527_data/Aug1-OutputAnalysis_all2/'
+fopParallelOutputAnalysis='/home/hung/git/COMS527_data/Aug1-OutputAnalysis_all3/'
 
 def intersection(lst1, lst2):
     lst3 = [value for value in lst1 if value in lst2]
