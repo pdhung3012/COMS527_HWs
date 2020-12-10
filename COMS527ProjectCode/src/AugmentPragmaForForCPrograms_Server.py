@@ -51,7 +51,7 @@ for currentFile in currentDirectory.glob(currentPattern):
 
 print('{}'.format(len(listFiles)))
 # Command cmd;
-clang.cindex.Config.set_library_file('/home/hung/anaconda3/pkgs/libclang-8.0.1-hc9558a2_2/lib/libclang.so')
+# clang.cindex.Config.set_library_file('/home/hung/anaconda3/pkgs/libclang-8.0.1-hc9558a2_2/lib/libclang.so')
 
 strPragmaForTemplate='#pragma omp parallel for'
 strSetThreadFunction='omp_set_num_threads(16);'
@@ -106,5 +106,5 @@ for i in range(0,len(listFiles)):
     except Exception as e:
         print('{} {} fail {}'.format((i + 1),fileNameI,str(e)))
 
-    # if (i>=1001):
-    #     break
+    if (i>=10):
+        break
