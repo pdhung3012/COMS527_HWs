@@ -17,9 +17,9 @@ def convertToNumber (s):
 def convertFromNumber (n):
     return n.to_bytes(math.ceil(n.bit_length() / 8), 'little').decode()
 
-fopInput='/Users/hungphan/git/COMS527/PrutorCodes/'
-fopAnalyzeResult= '/Users/hungphan/git/COMS527/AnalyzeForLoops/'
-fopDetails= '/Users/hungphan/git/COMS527/AnalyzeForLoops/details/'
+fopInput='/home/hung/git/COMS527_data/PrutorCodes/'
+fopAnalyzeResult= '/home/hung/git/COMS527_data/AnalyzeForLoops/'
+fopDetails= '/home/hung/git/COMS527_data/AnalyzeForLoops/details/'
 
 # fopSerialTime='/Users/hungphan/git/COMS527/SerialTimeAnalysis/'
 # fopOutputAnalysis='/Users/hungphan/git/COMS527/OutputAnalysis/'
