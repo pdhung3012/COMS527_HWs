@@ -106,8 +106,8 @@ for i in range(0,len(listFiles)):
     except Exception as e:
         print('{} {} fail {}'.format((i + 1),fileNameI,str(e)))
         traceback.print_exc()
-    if (i>=1001):
-        break
+    # if (i>=1001):
+    #     break
 
 sorted(dictAppearance.items(), key=lambda x: x[1], reverse=True)
 
