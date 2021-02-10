@@ -62,10 +62,13 @@ class ForItemAnalysisWalker:
         if (strNodeType == 'FOR_STMT'):
             if(len(self.stackForLoops)>0):
                 itemFor=self.stackForLoops.pop()
+                bigValue=-10000*itemFor.setOfLines[len(itemFor.setOfLines)-1]
+                itemFor.setOfLines.append(bigValue)
                 itemFor.setOfLines=set(itemFor.setOfLines)
                 # print('set {}'.format(itemFor.setOfLines))
                 if not itemFor is None:
                     self.listForLoopsAfterVisits.append(itemFor)
+
 
 
 
