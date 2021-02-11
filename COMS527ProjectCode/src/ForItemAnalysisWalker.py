@@ -2,13 +2,14 @@
 import sys
 import clang.cindex
 
-fpTempFile='/Users/hungphan/git/COMS527/SampleCodes/prutor_no_error7.c'
+fpTempFile='/home/hung/git/COMS527_data/SampleCodes/prutor_no_error7.c'
 
 class ForLoopItem:
     def __init__(self):
         self.loopId=-1
         self.setOfLines=[]
         self.currentMethodName=[]
+        self.listCodeContent=[]
 
 
 
@@ -18,6 +19,10 @@ class ForItemAnalysisWalker:
         self.currentFuncDeclName=''
         self.stackForLoops=[]
         self.listForLoopsAfterVisits=[]
+        f1 = open(filename, 'r')
+        strF1 = f1.read()
+        f1.close()
+        self.arrCodes = strF1.split('\n')
 
     def walkInForLoop(self, node,index):
         node_in_file =  bool(str(node.location.file) == self.filename)
@@ -39,20 +44,26 @@ class ForItemAnalysisWalker:
             lstLine.append(' ')
             lstLine.append(str(node.spelling))
             strLine=''.join(lstLine)
-            # print(strLine)
+            #print(strLine)
+
             if(strNodeType =='FUNCTION_DECL'):
                 self.currentFuncDeclName=str(node.spelling)
 
             if(strNodeType == 'FOR_STMT'):
                 itemFor=ForLoopItem()
                 itemFor.loopId=len(self.listForLoopsAfterVisits)+1
-                itemFor.setOfLines.append(node.location.line)
-                itemFor.currentMethodName=self.currentFuncDeclName
+                itemFor.currentMethodName = self.currentFuncDeclName
+                if node.location.line not in itemFor.setOfLines:
+                    itemFor.setOfLines.append(node.location.line)
+                    itemFor.listCodeContent.append(self.arrCodes[node.location.line - 1])
                 self.stackForLoops.append(itemFor)
-                # print(strLine)
+                print(strLine)
             elif len(self.stackForLoops)>0:
                 itemFor=self.stackForLoops[len(self.stackForLoops)-1]
-                itemFor.setOfLines.append(node.location.line)
+                if node.location.line not in itemFor.setOfLines:
+                    itemFor.setOfLines.append(node.location.line)
+                    itemFor.listCodeContent.append(self.arrCodes[node.location.line-1])
+
             #     print(strLine)
             # print(strLine)
 
@@ -62,24 +73,30 @@ class ForItemAnalysisWalker:
         if (strNodeType == 'FOR_STMT'):
             if(len(self.stackForLoops)>0):
                 itemFor=self.stackForLoops.pop()
-                bigValue=-10000*itemFor.setOfLines[len(itemFor.setOfLines)-1]
+                '''
+                bigValue=10000*itemFor.setOfLines[len(itemFor.setOfLines)-1]
                 itemFor.setOfLines.append(bigValue)
-                itemFor.setOfLines=set(itemFor.setOfLines)
-                # print('set {}'.format(itemFor.setOfLines))
+                '''
+                itemFor.setOfLines=sorted(set(itemFor.setOfLines))
+                print('set {}'.format(itemFor.setOfLines))
                 if not itemFor is None:
                     self.listForLoopsAfterVisits.append(itemFor)
+        elif (strNodeType == 'COMPOUND_STMT'):
+            if (len(self.stackForLoops) > 0):
+                itemFor = self.stackForLoops.pop()
+                itemFor.listCodeContent.append('}')
 
 
 
 
 #
-# index = clang.cindex.Index.create()
-# tu = index.parse(fpTempFile)
-# print('{}'.format(tu))
-# root = tu.cursor
-# index=0
-# indexOfForLoop=0
-# walker = ForItemAnalysisWalker(fpTempFile)
-# walker.walkInForLoop(root,index)
-# print('{}\n{}'.format(len(walker.listForLoopsAfterVisits),len(walker.listForLoopsAfterVisits[0].setOfLines)))
-# # print('size {} {} '.format(len(walker.listForLoops),walker.listForLoops[0].lineNumber))
+index = clang.cindex.Index.create()
+tu = index.parse(fpTempFile)
+print('{}'.format(tu))
+root = tu.cursor
+index=0
+indexOfForLoop=0
+walker = ForItemAnalysisWalker(fpTempFile)
+walker.walkInForLoop(root,index)
+print('{}'.format(len(walker.listForLoopsAfterVisits)))
+#print('size {} {} '.format(len(walker.listForLoops),walker.listForLoops[0].lineNumber))
