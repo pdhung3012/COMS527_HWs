@@ -57,12 +57,13 @@ class ForItemAnalysisWalker:
                     itemFor.setOfLines.append(node.location.line)
                     itemFor.listCodeContent.append(self.arrCodes[node.location.line - 1])
                 self.stackForLoops.append(itemFor)
-                print(strLine)
+                #print(strLine)
             elif len(self.stackForLoops)>0:
                 itemFor=self.stackForLoops[len(self.stackForLoops)-1]
                 if node.location.line not in itemFor.setOfLines:
                     itemFor.setOfLines.append(node.location.line)
                     itemFor.listCodeContent.append(self.arrCodes[node.location.line-1])
+                #print('len stack {}'.format(len(self.stackForLoops)))
 
             #     print(strLine)
             # print(strLine)
@@ -71,6 +72,7 @@ class ForItemAnalysisWalker:
             childIndex=index+1
             self.walkInForLoop(child,childIndex)
         if (strNodeType == 'FOR_STMT'):
+           # print('go here {}'.format(len(self.stackForLoops)))
             if(len(self.stackForLoops)>0):
                 itemFor=self.stackForLoops.pop()
                 '''
@@ -78,12 +80,12 @@ class ForItemAnalysisWalker:
                 itemFor.setOfLines.append(bigValue)
                 '''
                 itemFor.setOfLines=sorted(set(itemFor.setOfLines))
-                print('set {}'.format(itemFor.setOfLines))
+                #print('set {}'.format(itemFor.setOfLines))
                 if not itemFor is None:
                     self.listForLoopsAfterVisits.append(itemFor)
         elif (strNodeType == 'COMPOUND_STMT'):
             if (len(self.stackForLoops) > 0):
-                itemFor = self.stackForLoops.pop()
+                itemFor = self.stackForLoops[len(self.stackForLoops) - 1]
                 itemFor.listCodeContent.append('}')
 
 
@@ -98,5 +100,5 @@ index=0
 indexOfForLoop=0
 walker = ForItemAnalysisWalker(fpTempFile)
 walker.walkInForLoop(root,index)
-print('{}'.format(len(walker.listForLoopsAfterVisits)))
+print('{}\n{}'.format(len(walker.listForLoopsAfterVisits),walker.listForLoopsAfterVisits[0].listCodeContent))
 #print('size {} {} '.format(len(walker.listForLoops),walker.listForLoops[0].lineNumber))
