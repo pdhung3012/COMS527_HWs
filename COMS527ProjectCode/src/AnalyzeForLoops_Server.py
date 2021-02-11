@@ -84,12 +84,8 @@ for i in range(0,len(listFiles)):
         listForLoops=walker.listForLoopsAfterVisits
         for j in range(0,len(listForLoops)):
             itemFor=listForLoops[j]
-            lstForContent=[]
-            for itt in itemFor.setOfLines:
-                if itt>10000:
-                    lstForContent.append('}')
-                else:
-                    lstForContent.append(arrF1[itt-1])
+            lstForContent=itemFor.listCodeContent
+            #print('itemFor {}'.format(itemFor.setOfLines))
 
             strContentItem='\n'.join(lstForContent).strip()
             strContentItem=strContentItem.replace('\t',' ').replace('\n',' ').strip()
@@ -109,8 +105,8 @@ for i in range(0,len(listFiles)):
     except Exception as e:
         print('{} {} fail {}'.format((i + 1),fileNameI,str(e)))
         traceback.print_exc()
-    if (i>=1001):
-        break
+   # if (i>=1001):
+    #    break
 
 sorted(dictAppearance.items(), key=lambda x: x[1], reverse=True)
 
